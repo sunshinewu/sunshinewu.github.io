@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SunshineWu.Print()</title>
+  <subtitle>老鲜肉和他的技术“渣”谈</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://sunshinewu.github.io/"/>
+  <updated>2016-05-10T20:09:33.771Z</updated>
+  <id>http://sunshinewu.github.io/</id>
+  
+  <author>
+    <name>Sunshine.Wu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【JavaScript奇葩之美Ver.1】var，确定你真的会使它么？</title>
+    <link href="http://sunshinewu.github.io/2016/05/11/js-fun-var/"/>
+    <id>http://sunshinewu.github.io/2016/05/11/js-fun-var/</id>
+    <published>2016-05-10T17:01:17.000Z</published>
+    <updated>2016-05-10T20:09:33.771Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在茫茫前端路各种<strong>专业化、对象化、工程化</strong>的今天，你以为光会切个图写点<strong>DIV\CSS</strong>就能称前端了？</p>
+<p>在Node.js火爆当道，在AngularJS\Express\Vue\React等各种框架层出不穷之时，万变不离其宗，唯一能让自己心安的，或许还是老老实实一点点打下扎实高端大气上档次的JavaScript基础，玩转玩遍它才是王道呀。自从学习JavaScript以来，它的无拘无束的「自由」实在令人印象深刻且赞，但同时也带来太多的奇葩与有些别扭的语法糖。</p>
+<p><center><br><img src="http://sunshinewu.github.io/images/2.gif"></center></p>
+<p><a id="more"></a> </p>
+<p>其实，换个角度出发，这些有时候让人不那么愉快的一面，不也正是JavaScript独特的美和气质么？OK，接下来我就一点点把平常遇到的一些“美”给记录下来，以供小伙伴们一同欣赏:)</p>
+<h1 id="发现美"><a href="#发现美" class="headerlink" title="发现美"></a>发现美</h1><p>前两天在V2EX看到一个童鞋的疑问：</p>
+<blockquote>
+<p>JavaScript 里 var x = i = 0 这个写法是什么意思呢?</p>
+</blockquote>
+<p>这还有啥意思！不就是最最最简单的赋值语句嘛！C\C++\Java等各种语言都有的嘛！ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int x = i = 0;</div></pre></td></tr></table></figure>
+<p>打完收工！奏是这么简单，哟嘿哟嘿~</p>
+<p>等等，既然你这么问，想必来者不善，不妨又是给我埋的一个坑吧~~那我们来动手看看是否有坑！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function wss() &#123;</div><div class="line">    var x = i = 0;</div><div class="line">&#125; </div><div class="line">wss(); </div><div class="line">alert(x); //&apos;x&apos; is not defined 这个结果正常嘛!毕竟函数内变量的作用范围是局限在函数内部的哟~</div><div class="line">alert(i); //0 卧槽！肿么可以输出0来！！！恭喜你，果断入坑！</div></pre></td></tr></table></figure>
+<p>这样的结果，怎能不感慨“好一个<strong>人参惨淡</strong>”，在了解这个背后的原因之前，我们先来了解下JavaScript官方对于变量Var的一些定义及解释：</p>
+<ul>
+<li>变量的声明</li>
+</ul>
+<p>　　　　1.使用var多次声明同一个变量，是合法的; 重复的声明并初始化变量值，只是相当于普通的赋值语句;</p>
+<p>　　　　2.读取一个未声明的变量值，JavaScript会产生一个错误;</p>
+<p>　　　　3.尝试给一个未经var声明的变量赋值，JavaScript会隐式声明该变量，隐式声明的变量被直接创建为全局变量;</p>
+<p>　　　　4.无论是全局变量还是局部变量，最好都建议使用var进行声明（strict严格模式下不声明var变量直接报错）;</p>
+<p>看完这样的定义，一下子秒懂，有木有？！</p>
+<p>刚才我们上面童鞋那样的写法，直接会导致 <strong>i 变成全局变量</strong>， 所以等同写法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function wss() &#123;</div><div class="line">    i = 0;</div><div class="line">    var x = i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，看看，这是一个多么糟糕的写法，直接会隐式创建一个全局变量，继而引发变量污染。所以，我们切记，在日常开发过程中，不要这么写！</p>
+<h2 id="延伸一"><a href="#延伸一" class="headerlink" title="延伸一"></a>延伸一</h2><p>那到这里，突然还有个疑问，你们说，这显式创建的全局变量和隐式创建的全局变量，自然都是window的属性，那他们俩者真的完全一样么？我们通过ECMAScrpit提供的属性特性查询方法，来发现他们之间的秘密。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = 2; </div><div class="line">window.b = 3; </div><div class="line">c = 4; </div><div class="line">this.d = 4; </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;a&apos;); //configurable:false,enumerable:true,value:2,writable:true </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;b&apos;); //configurable:true,enumerable:true,value:3,writable:true </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;c&apos;); //configurable:true,enumerable:true,value:4,writable:true </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;d&apos;); //configurable:true,enumerable:true,value:4,writable:true</div></pre></td></tr></table></figure>
+<p>通过上面的查询发现，原来还是有差别的，我们再用delete删除属性来验证下，配置性configurable为false的属性无法删除，即通过变量var显式声明全局对象的属性无法删除。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">delete a; // 无法删除 </div><div class="line">delete b; // 可删除 </div><div class="line">delete c; // 可删除 </div><div class="line">delete d; // 可删除</div></pre></td></tr></table></figure></p>
+<h5 id="结论就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。"><a href="#结论就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。" class="headerlink" title="结论就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。"></a><strong>结论</strong>就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。</h5><h2 id="延伸二"><a href="#延伸二" class="headerlink" title="延伸二"></a>延伸二</h2><p>我们试着来再看这一段小程序，看看结果如何？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var wss = &quot;global&quot;;        </div><div class="line">function f()&#123;           </div><div class="line">    alert(wss);            //提示undefined           </div><div class="line">    var wss = &quot;local&quot;;            </div><div class="line">    alert(wss);           //提示local                           </div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure>
+<p>为何会是这样的结果？这个跟使用<strong>var定义变量还会提升变量声明</strong>有关。</p>
+<p>在函数内部显式声明了一个与全局变量同名的局部变量，第一次alert， 解析器就会先将变量声明提升，所以就导致局部变量wss是已经被声明了，但是没有初始化值，所以提示undefined; 而第二次的alert，wss = “local” 之后的，也就是局部变量wss完成了初始化，所以提示为local。</p>
+<p>该段代码实际相当于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var wss = &quot;global&quot;;        </div><div class="line">function f()&#123;            </div><div class="line">    var wss;       //声明局部变量wss，未初始化            </div><div class="line">    alert(wss);                      </div><div class="line">    wss = &quot;local&quot;; //初始化wss          </div><div class="line">    alert(wss);                                   </div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure>
+<p>那如果不使用var定义变量呢？ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var wss = &quot;global&quot;;        </div><div class="line">function f()&#123;            </div><div class="line">    alert(wss);            //提示global    </div><div class="line">    alert(wss2);           //&apos;wss2&apos; is not defined</div><div class="line">    wss = &quot;local&quot;;   </div><div class="line">    wss2 = &quot;local2&quot;;         </div><div class="line">    alert(wss);           //提示local                           </div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure>
+<h5 id="结论就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。"><a href="#结论就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。" class="headerlink" title="结论就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。"></a><strong>结论</strong>就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。</h5><h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>JavaScript一个如此简单的赋值语句背后，竟隐藏着太多奇葩的特性，而这些一个不留神，就将让你的程序陷入一个变量污染噩梦里。美，也是有杀伤力滴~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在茫茫前端路各种&lt;strong&gt;专业化、对象化、工程化&lt;/strong&gt;的今天，你以为光会切个图写点&lt;strong&gt;DIV\CSS&lt;/strong&gt;就能称前端了？&lt;/p&gt;
+&lt;p&gt;在Node.js火爆当道，在AngularJS\Express\Vue\React等各种框架层出不穷之时，万变不离其宗，唯一能让自己心安的，或许还是老老实实一点点打下扎实高端大气上档次的JavaScript基础，玩转玩遍它才是王道呀。自从学习JavaScript以来，它的无拘无束的「自由」实在令人印象深刻且赞，但同时也带来太多的奇葩与有些别扭的语法糖。&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;br&gt;&lt;img src=&quot;http://sunshinewu.github.io/images/2.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://sunshinewu.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://sunshinewu.github.io/tags/JavaScript/"/>
+    
+      <category term="变量var" scheme="http://sunshinewu.github.io/tags/%E5%8F%98%E9%87%8Fvar/"/>
+    
+      <category term="奇葩之美" scheme="http://sunshinewu.github.io/tags/%E5%A5%87%E8%91%A9%E4%B9%8B%E7%BE%8E/"/>
+    
+      <category term="隐式" scheme="http://sunshinewu.github.io/tags/%E9%9A%90%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【GitHub + Hexo 干货No.1】初相遇，好基友，一辈子！</title>
+    <link href="http://sunshinewu.github.io/2016/05/07/Hexo-World/"/>
+    <id>http://sunshinewu.github.io/2016/05/07/Hexo-World/</id>
+    <published>2016-05-06T17:49:11.000Z</published>
+    <updated>2016-07-25T19:11:20.144Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><h3 id="What-is-Hexo"><a href="#What-is-Hexo" class="headerlink" title="What is Hexo?"></a>What is Hexo?</h3><p>Hexo 是一个简单、轻量、基于Node.js的一个静态博客框架，可以方便的生成静态网页托管在GitHub | Coding | GitCafe | 七牛等各种静态存储空间上，引用Hexo作者 @tommy351（台湾） 的原话：</p>
+<blockquote>
+<p>快速、简单且功能强大的 Node.js 博客框架。</p>
+<p>A fast, simple &amp; powerful blog framework, powered by Node.js.</p>
+</blockquote>
+<center><br><img src="http://sunshinewu.github.io/images/1.gif"><br><br></center>
+
+<a id="more"></a>
+<p>身为程序猿，不捣腾点折腾玩意儿，那都愧对咱自己，纵使996，亦或天天加班的情况下，还尼玛抽出点时间来写写Blog也是一种“<strong>幸福</strong>”嘛！于是，你就在新浪Blog，CSDN，博客园安家？那多没逼格啊！！肯定得整个自己的独立博客嘛，可又觉得申请域名 + 服务器 + SQL存储 + 部署 + 防入侵神马的太麻烦也就一直没去弄（<strong>真相</strong>：WordPress，各种一键安装神马的，实在提不起劲来了，就作吧-_-|）。不知从何年何月开始，身边慢慢多了很多猿子们一个个在晒自己的GitHub Blog，啧啧，这种潮流，咱能不跟进嘛~~</p>
+<p>话说回来，Hexo这个优秀的静态博客框架，搭配上现在流行的GitHub，简直是屌丝党居家<strong>必备良品</strong> &amp; 码字Blog的黄金搭档哟。<br>OK，闲话不多说，咱们开始干货之旅吧！</p>
+<p>若是小小菜，可以先暂且花点小时间稍微了解下以下内容：</p>
+<ul>
+<li><a href="http://git-scm.com/book/zh/v2" target="_blank" rel="external">Git</a></li>
+<li><a href="https://github.com/" target="_blank" rel="external">GitHub</a></li>
+<li><a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a></li>
+<li><a href="https://hexo.io/zh-cn/" target="_blank" rel="external">Hexo</a></li>
+<li><a href="https://github.com/riku/Markdown-Syntax-CN" target="_blank" rel="external">Markdown</a></li>
+</ul>
+<h1 id="二、操刀配置-Windows平台下"><a href="#二、操刀配置-Windows平台下" class="headerlink" title="二、操刀配置(Windows平台下)"></a>二、操刀配置(Windows平台下)</h1><h2 id="2-1-GitHub-Pages-Repositories"><a href="#2-1-GitHub-Pages-Repositories" class="headerlink" title="2.1 GitHub Pages Repositories"></a>2.1 GitHub Pages Repositories</h2><h3 id="2-1-1-创建对应仓库"><a href="#2-1-1-创建对应仓库" class="headerlink" title="2.1.1 创建对应仓库"></a>2.1.1 创建对应仓库</h3><p>在自己的 GitHub 账号下创建一个新的仓库，命名为<strong>username.github.io</strong>（username是你的账号名)。</p>
+<p>在这里，要知道，GitHub Pages有两种类型：User/Organization Pages 和 Project Pages，而咱们这一次所使用的是User Pages。</p>
+<p><strong>User Pages 与 Project Pages的区别</strong>：</p>
+<ol>
+<li>User Pages 是用来展示用户的，而 Project Pages 是用来展示项目的。</li>
+<li>用于存放 User Pages 的仓库必须使用username.github.io的命名规则，而 Project Pages 则没有特殊的要求。</li>
+<li>User Pages 将使用仓库的 master 分支，而 Project Pages 将使用 gh-pages 分支（以前还需要手工设置，现在貌似当创建项目时会自动归类到gh-pages分支）。</li>
+<li>User Pages 通过 http(s)://username.github.io  进行访问，而 Projects Pages通过 http(s)://username.github.io/projectname 进行访问。</li>
+</ol>
+<h3 id="2-1-2-相关资料"><a href="#2-1-2-相关资料" class="headerlink" title="2.1.2 相关资料"></a>2.1.2 相关资料</h3><ul>
+<li><a href="https://help.github.com/articles/user-organization-and-project-pages/" target="_blank" rel="external">GitHub Pages Basics / User, Organization, and Project Pages</a></li>
+</ul>
+<h2 id="2-2-Git"><a href="#2-2-Git" class="headerlink" title="2.2 Git"></a>2.2 Git</h2><h3 id="2-2-1-安装-Git"><a href="#2-2-1-安装-Git" class="headerlink" title="2.2.1 安装 Git"></a>2.2.1 安装 Git</h3><p>在windows下安装git比较常用的有两种方式：</p>
+<ul>
+<li><a href="http://git-scm.com/download/win" target="_blank" rel="external">Git 官方版本安装</a></li>
+<li><a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows客户端安装</a></li>
+</ul>
+<h3 id="2-2-2-配置-Git"><a href="#2-2-2-配置-Git" class="headerlink" title="2.2.2 配置 Git"></a>2.2.2 配置 Git</h3><p>一般建议使用Git Bash，所以当安装完Git应该做的第一件事情就是设置用户名称和邮件地址。这样做很重要，因为每一个Git的提交都会使用这些信息，并且它会写入你的每一次提交中，不可更改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;username&quot;</div><div class="line">$ git config --global user.email &quot;username@example.com&quot;</div></pre></td></tr></table></figure>
+<h3 id="2-2-3-相关资料"><a href="#2-2-3-相关资料" class="headerlink" title="2.2.3 相关资料"></a>2.2.3 相关资料</h3><ul>
+<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">安装 Git</a></li>
+<li><a href="http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE" target="_blank" rel="external">配置 Git</a></li>
+<li><a href="https://help.github.com/articles/setting-your-email-in-git/" target="_blank" rel="external">Setting your email in Git</a></li>
+<li><a href="https://help.github.com/articles/keeping-your-email-address-private/" target="_blank" rel="external">Keeping your email address private</a></li>
+</ul>
+<h2 id="2-3-Git-与-GitHub"><a href="#2-3-Git-与-GitHub" class="headerlink" title="2.3 Git 与 GitHub"></a>2.3 Git 与 GitHub</h2><h3 id="2-3-1-Git-与-GitHub-的区别"><a href="#2-3-1-Git-与-GitHub-的区别" class="headerlink" title="2.3.1 Git 与 GitHub 的区别"></a>2.3.1 Git 与 GitHub 的区别</h3><p>这里，我们要区分清楚 Git 与 GitHub。</p>
+<p>Git是一个版本控制的工具，而GitHub有点类似于远程仓库，用于存放用Git管理的各种公有或私有项目。</p>
+<h3 id="2-3-2-与-GitHub-建立联系"><a href="#2-3-2-与-GitHub-建立联系" class="headerlink" title="2.3.2 与 GitHub 建立联系"></a>2.3.2 与 GitHub 建立联系</h3><p>为了能够在本地使用 Git 管理 GitHub 上的项目，需要进行一些配置，这里介绍SSH的方法。</p>
+<h4 id="2-3-2-1-检查电脑是否已经有SSH-keys"><a href="#2-3-2-1-检查电脑是否已经有SSH-keys" class="headerlink" title="2.3.2.1 检查电脑是否已经有SSH keys"></a>2.3.2.1 检查电脑是否已经有SSH keys</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ls -al ~/.ssh</div></pre></td></tr></table></figure>
+<p>如果列出的文件有public和private钥匙对（例如id_ras.pub和id_rsa），证明已存在SSH keys。</p>
+<h4 id="2-3-2-2-如果没有SSH-key，则生成新的SSH-key"><a href="#2-3-2-2-如果没有SSH-key，则生成新的SSH-key" class="headerlink" title="2.3.2.2 如果没有SSH key，则生成新的SSH key"></a>2.3.2.2 如果没有SSH key，则生成新的SSH key</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</div></pre></td></tr></table></figure>
+<p>之后一路回车即可。</p>
+<h4 id="2-3-2-3-向ssh-agent添加key。"><a href="#2-3-2-3-向ssh-agent添加key。" class="headerlink" title="2.3.2.3 向ssh-agent添加key。"></a>2.3.2.3 向ssh-agent添加key。</h4><p>首先确保ssh-agent可运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-agent -s</div></pre></td></tr></table></figure>
+<p>然后添加SSH key：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add ~/.ssh/id_rsa</div></pre></td></tr></table></figure>
+<p>注意： 此刻如果执行 ssh-add 时显示错误 Could not open a connection to your authentication agent. 那么执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eval `ssh-agent -s`</div></pre></td></tr></table></figure></p>
+<p>后重新执行 ssh-add 那条命令即可。</p>
+<h4 id="2-3-2-4-在GitHub添加SSH-key"><a href="#2-3-2-4-在GitHub添加SSH-key" class="headerlink" title="2.3.2.4 在GitHub添加SSH key"></a>2.3.2.4 在GitHub添加SSH key</h4><p>首先，拷贝key：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">clip &lt; ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure></p>
+<p>也可以用编辑器打开对应的id_rsa.pub文件，全选复制。</p>
+<p>然后，在GitHub右上方点击头像，选择”Settings”，在右边的”Personal settings”侧边栏选择”SSH Keys”。接着粘贴key，点击”Add key”按钮。最后，测试链接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure></p>
+<p>如果你看到：</p>
+<blockquote>
+<p>The authenticity of host ‘github.com (192.30.252.XXX)’ can’t be established.<br>RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br>Are you sure you want to continue connecting (yes/no)?</p>
+</blockquote>
+<p>就键入：yes。之后将会看到如下信息：</p>
+<blockquote>
+<p>Hi username! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+<h3 id="2-3-3-相关资料"><a href="#2-3-3-相关资料" class="headerlink" title="2.3.3 相关资料"></a>2.3.3 相关资料</h3><ul>
+<li><a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">Generating SSH keys</a></li>
+</ul>
+<h2 id="2-4-Hexo"><a href="#2-4-Hexo" class="headerlink" title="2.4 Hexo"></a>2.4 Hexo</h2><h3 id="2-4-1-安装Hexo"><a href="#2-4-1-安装Hexo" class="headerlink" title="2.4.1 安装Hexo"></a>2.4.1 安装Hexo</h3><p>安装Hexo相当简单。在安装之前，必须检查电脑中是否已经安装下列应用程序：</p>
+<ul>
+<li><a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></li>
+<li><a href="http://git-scm.com/" target="_blank" rel="external">Git</a></li>
+</ul>
+<p>如果你的电脑中已经安装上述必备程序，那么恭喜！接下来只需要使用 npm 即可完成 Hexo 的安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：苦于处于“大局域网”环境下，安装及初始化的过程会较为慢-_-#</p>
+</blockquote>
+<h3 id="2-4-2-使用Hexo建站"><a href="#2-4-2-使用Hexo建站" class="headerlink" title="2.4.2 使用Hexo建站"></a>2.4.2 使用Hexo建站</h3><p>安装完后，在你想创建的供以后存储Blog相关的文件夹内（例如 D:\Hexo），点击鼠标右键选择Git bash，输入以下指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div></pre></td></tr></table></figure>
+<p>该命令会在目标文件夹内建立Blog所需的所有文件。接下来是安装依赖包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p>这样，我们就已经搭建起本地的 Hexo 博客了。可以先执行以下命令，然后在浏览器输入 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 就可以满怀激动地查看我们的“小家”啦。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure>
+<h3 id="这里顺便普及几个-Hexo-常用的命令，-后面为注释。"><a href="#这里顺便普及几个-Hexo-常用的命令，-后面为注释。" class="headerlink" title="这里顺便普及几个 Hexo 常用的命令，#后面为注释。"></a>这里顺便普及几个 Hexo 常用的命令，#后面为注释。</h3><blockquote>
+<p>hexo g #完整命令为hexo generate，用于生成静态文件</p>
+<p>hexo s #完整命令为hexo server，用于启动服务器，主要用来本地预览</p>
+<p>hexo d #完整命令为hexo deploy，用于将本地文件发布到github上</p>
+<p>hexo n #完整命令为hexo new，用于新建一篇文章</p>
+</blockquote>
+<p>当然，这个眼前所见的博客只是本地的，别人是浏览不了的，你需要结合Git部署到GitHub上，大家才可以正常浏览到。</p>
+<h3 id="2-4-3-相关资料"><a href="#2-4-3-相关资料" class="headerlink" title="2.4.3 相关资料"></a>2.4.3 相关资料</h3><ul>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo 官方文档</a></li>
+</ul>
+<h1 id="三、部署之道"><a href="#三、部署之道" class="headerlink" title="三、部署之道"></a>三、部署之道</h1><p>在上面，我们已经配置好了所需的所有东西，也成功地搭建了一个本地 Hexo 博客。现在，需要使用 GitHub Pages 搭建一个大家都能够访问的 Hexo 博客了。</p>
+<h2 id="3-1-使用默认theme"><a href="#3-1-使用默认theme" class="headerlink" title="3.1 使用默认theme"></a>3.1 使用默认theme</h2><p>我们继续使用上面的文件夹D:\Hexo，然后编辑该文件夹下的_config.yml。</p>
+<p>默认生成的_config.yml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># Deployment</div><div class="line">## Docs: http://hexo.io/docs/deployment.html</div><div class="line">deploy:</div><div class="line">  type:</div></pre></td></tr></table></figure>
+<p>修改后的_config.yml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repo: 对应仓库的SSH地址（好比我的：https://github.com/sunshinewu/sunshinewu.github.io.git）</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>为了能够使Hexo部署到GitHub上，还需要安装一个插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>然后，执行下列指令即可完成部署：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure>
+<p>现在，就可以通过在浏览器地址栏敲入：username.github.io进行浏览啦！激动吧！！~</p>
+<h2 id="3-2-其它主题theme"><a href="#3-2-其它主题theme" class="headerlink" title="3.2 其它主题theme"></a>3.2 其它主题theme</h2><p>如果想要使用其它主题，可以使用git clone将别人的主题拷贝到D:\Hexo\themes下，然后将_config.yml中的theme: landscape改为对应的主题名字。</p>
+<p>详细步骤可以参考网上其它的指南。</p>
+<h1 id="四、写下-amp-发布一篇文章"><a href="#四、写下-amp-发布一篇文章" class="headerlink" title="四、写下&amp;发布一篇文章"></a>四、写下&amp;发布一篇文章</h1><h3 id="4-1-创建："><a href="#4-1-创建：" class="headerlink" title="4.1 创建："></a>4.1 创建：</h3><p>在Git Bash执行命令创建一篇文章<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;Hexo First&quot;</div></pre></td></tr></table></figure></p>
+<h3 id="4-2-打开-amp-编写"><a href="#4-2-打开-amp-编写" class="headerlink" title="4.2 打开 &amp; 编写"></a>4.2 打开 &amp; 编写</h3><p>在D:\hexo\source_post中打开Hexo-First.md，打开方式使用记事本或者其他文本编辑工具。<br>Hexo 中写文章使用的是 Markdown ，这里推荐使用 <code>MarkdownPad</code> 这个工具。 Markdown编写语法参照上面所推荐一个链接，不难</p>
+<blockquote>
+<p>title: Hexo First #可改成中文的，如“好基友”</p>
+<p>date: 2016-05-07 01:49:11 #发表日期，一般不改动</p>
+<p>categories: blog #文章文类</p>
+<p>tags: [文章] #文章标签，多于一项时用这种格式，只有一项时使用tags: blog</p>
+<hr>
+<p>这里是正文，用 Markdown 写，你可以选择写一段显示在首页的简介后，加上<code>&lt;!--more--&gt;</code>，在<code>&lt;!--more--&gt;</code>之前的内容会显示在首页，之后的内容会被隐藏，当别人点击<strong>Read More</strong>或主题进入文章内才能看到。</p>
+</blockquote>
+<h3 id="4-3-生成-amp-预览-amp-部署"><a href="#4-3-生成-amp-预览-amp-部署" class="headerlink" title="4.3 生成 &amp; 预览 &amp; 部署"></a>4.3 生成 &amp; 预览 &amp; 部署</h3><p>写完文章后，你可以使用</p>
+<ol>
+<li>$ hexo g #生成静态文件</li>
+<li>$ hexo s #在本地预览效果</li>
+<li>$ hexo d #同步到 GitHub，然后使用 <a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a> 进行访问</li>
+</ol>
+<h1 id="五、优化部署与管理"><a href="#五、优化部署与管理" class="headerlink" title="五、优化部署与管理"></a>五、优化部署与管理</h1><p>注：参考部分网友建议</p>
+<h3 id="5-1-概述"><a href="#5-1-概述" class="headerlink" title="5.1 概述"></a>5.1 概述</h3><p>Hexo部署到 GitHub 上的文件，是.md（你的博文）转化之后的.html（静态网页）。因此，当你重装电脑或者想在不同电脑上修改博客时，就不可能了（除非你自己写html o(^▽^)o ）。</p>
+<p>其实，Hexo生成的网站文件中有.gitignore文件，因此它的本意也是想我们将Hexo生成的网站文件存放到GitHub上进行管理的（而不是用U盘）。这样，不仅解决了上述的问题，还可以通过git的版本控制追踪你的博文的修改过程，是极赞的。</p>
+<p>但是，如果每一个GitHub Pages都需要创建一个额外的仓库来存放Hexo网站文件，感觉会很麻烦（10个项目需要20个仓库(ˉ▽ˉ)…）。</p>
+<p>所以，分支就可以派上用场了！！！</p>
+<p>简单地说，每个想建立GitHub Pages的仓库，起码有两个分支，一个用来存放Hexo网站的文件，一个用来发布网站。</p>
+<p>下面以一个例子详细地讲述下。</p>
+<h3 id="5-2-博客搭建流程"><a href="#5-2-博客搭建流程" class="headerlink" title="5.2 博客搭建流程"></a>5.2 博客搭建流程</h3><ol>
+<li>创建仓库，username.github.io；</li>
+<li>创建两个分支：master 与 hexo；</li>
+<li>设置hexo为默认分支（因为我们只需要手动管理这个分支上的Hexo网站文件）；</li>
+<li>使用git clone git@github.com:username/username.github.io.git拷贝仓库；</li>
+<li>username.github.io文件夹下通过Git bash依次执行npm install hexo、hexo init、npm install 和 npm install hexo-deployer-git（此时当前分支应显示为hexo）;</li>
+<li>修改_config.yml中的deploy参数，分支应为master；</li>
+<li>依次执行git add .、git commit -m “…”、git push origin hexo提交网站相关的文件；</li>
+<li>执行hexo generate -d生成网站并部署到GitHub上。</li>
+</ol>
+<p>这样一来，在GitHub上的username.github.io仓库就有两个分支，一个hexo分支用来存放网站的原始文件，一个master分支用来存放生成的静态网页。完美( •̀ ω •́ )y！</p>
+<h3 id="5-3-博客管理流程"><a href="#5-3-博客管理流程" class="headerlink" title="5.3 博客管理流程"></a>5.3 博客管理流程</h3><h4 id="5-3-1-日常修改"><a href="#5-3-1-日常修改" class="headerlink" title="5.3.1 日常修改"></a>5.3.1 日常修改</h4><p>在本地对博客进行修改（添加新博文、修改样式等等）后，通过下面的流程进行管理：</p>
+<ol>
+<li>依次执行git add .、git commit -m “…”、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo）；</li>
+<li>然后才执行hexo generate -d发布网站到master分支上。</li>
+</ol>
+<p>虽然两个过程顺序调转一般不会有问题，不过逻辑上这样的顺序是绝对没问题的（例如突然死机要重装了，悲催….的情况，调转顺序就有问题了）。</p>
+<h4 id="5-3-2-本地资料丢失"><a href="#5-3-2-本地资料丢失" class="headerlink" title="5.3.2 本地资料丢失"></a>5.3.2 本地资料丢失</h4><p>当重装电脑之后，或者想在其他电脑上修改博客，可以使用下列步骤：</p>
+<ol>
+<li>使用git clone git@github.com:username/username.github.io.git拷贝仓库（默认分支为hexo）；</li>
+<li>在本地新拷贝的username.github.io文件夹下通过Git bash依次执行下列指令：npm install hexo、npm install、npm install hexo-deployer-git（记得，不需要hexo init这条指令）。</li>
+</ol>
+<h1 id="六、结尾"><a href="#六、结尾" class="headerlink" title="六、结尾"></a>六、结尾</h1><p>整理下来，好累但值得 (-.-)=3</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;一、前言&quot;&gt;&lt;a href=&quot;#一、前言&quot; class=&quot;headerlink&quot; title=&quot;一、前言&quot;&gt;&lt;/a&gt;一、前言&lt;/h1&gt;&lt;h3 id=&quot;What-is-Hexo&quot;&gt;&lt;a href=&quot;#What-is-Hexo&quot; class=&quot;headerlink&quot; title=&quot;What is Hexo?&quot;&gt;&lt;/a&gt;What is Hexo?&lt;/h3&gt;&lt;p&gt;Hexo 是一个简单、轻量、基于Node.js的一个静态博客框架，可以方便的生成静态网页托管在GitHub | Coding | GitCafe | 七牛等各种静态存储空间上，引用Hexo作者 @tommy351（台湾） 的原话：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;快速、简单且功能强大的 Node.js 博客框架。&lt;/p&gt;
+&lt;p&gt;A fast, simple &amp;amp; powerful blog framework, powered by Node.js.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;center&gt;&lt;br&gt;&lt;img src=&quot;http://sunshinewu.github.io/images/1.gif&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;
+    
+    </summary>
+    
+      <category term="Hexo" scheme="http://sunshinewu.github.io/categories/Hexo/"/>
+    
+    
+      <category term="Blog" scheme="http://sunshinewu.github.io/tags/Blog/"/>
+    
+      <category term="静态博客" scheme="http://sunshinewu.github.io/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="Hexo" scheme="http://sunshinewu.github.io/tags/Hexo/"/>
+    
+      <category term="GitHub Page" scheme="http://sunshinewu.github.io/tags/GitHub-Page/"/>
+    
+      <category term="Git， 干货， 基友" scheme="http://sunshinewu.github.io/tags/Git%EF%BC%8C-%E5%B9%B2%E8%B4%A7%EF%BC%8C-%E5%9F%BA%E5%8F%8B/"/>
+    
+  </entry>
+  
+</feed>

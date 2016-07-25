@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【JavaScript奇葩之美Ver.1】var，确定你真的会使它么？ | SunshineWu.Print() | 老鲜肉和他的技术“渣”谈</title>
+  <meta name="author" content="Sunshine.Wu">
+  
+  <meta name="description" content="前言在茫茫前端路各种专业化、对象化、工程化的今天，你以为光会切个图写点DIV\CSS就能称前端了？
+在Node.js火爆当道，在AngularJS\Express\Vue\React等各种框架层出不穷之时，万变不离其宗，唯一能让自己心安的，或许还是老老实实一点点打下扎实高端大气上档次的JavaScript基础，玩转玩遍它才是王道呀。自从学习JavaScript以来，它的无拘无束的「自由」实在令人印象深刻且赞，但同时也带来太多的奇葩与有些别扭的语法糖。">
+  
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="【JavaScript奇葩之美Ver.1】var，确定你真的会使它么？"/>
+  <meta property="og:site_name" content="SunshineWu.Print()"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="SunshineWu.Print()" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?d92dc1ab429496757fa0b326d16dcec0";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+
+<body>
+<div id="page" class="site">
+  <div id="primary" class="content-area">
+
+    <header id="header" class="inner"><div class="site-branding container cyan brackets">
+  <h1 class="site-title">
+    <a href="/">SunshineWu.Print()</a>
+  </h1>
+  <p class="site-description">老鲜肉和他的技术“渣”谈</p>
+</div>
+<nav id="site-navigation" class="main-navigation containerNav bracketsNav" role="navigation">
+  <ul>
+    
+      <li><a href="/">主页</a></li>
+    
+      <li><a href="/archives">归档</a></li>
+    
+      <li><a href="/atom.xml">订阅</a></li>
+    
+      <li><a href="/about">关于</a></li>
+    
+      <li><a href="/links">邻居</a></li>
+    
+  </ul>
+</nav></header>
+
+    <article id="content" class="site-content">
+      <main id="main" class="site-main posts-loop" role="main">
+        <article class="post article">
+
+  
+  
+    <h3 class="article-title"><span>【JavaScript奇葩之美Ver.1】var，确定你真的会使它么？</span></h3>
+  
+
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/11/js-fun-var/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-10T17:01:17.000Z">
+          2016-05-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在茫茫前端路各种<strong>专业化、对象化、工程化</strong>的今天，你以为光会切个图写点<strong>DIV\CSS</strong>就能称前端了？</p>
+<p>在Node.js火爆当道，在AngularJS\Express\Vue\React等各种框架层出不穷之时，万变不离其宗，唯一能让自己心安的，或许还是老老实实一点点打下扎实高端大气上档次的JavaScript基础，玩转玩遍它才是王道呀。自从学习JavaScript以来，它的无拘无束的「自由」实在令人印象深刻且赞，但同时也带来太多的奇葩与有些别扭的语法糖。</p>
+<p><center><br><img src="http://sunshinewu.github.io/images/2.gif"></center></p>
+<p><a id="more"></a> </p>
+<p>其实，换个角度出发，这些有时候让人不那么愉快的一面，不也正是JavaScript独特的美和气质么？OK，接下来我就一点点把平常遇到的一些“美”给记录下来，以供小伙伴们一同欣赏:)</p>
+<h1 id="发现美"><a href="#发现美" class="headerlink" title="发现美"></a>发现美</h1><p>前两天在V2EX看到一个童鞋的疑问：</p>
+<blockquote>
+<p>JavaScript 里 var x = i = 0 这个写法是什么意思呢?</p>
+</blockquote>
+<p>这还有啥意思！不就是最最最简单的赋值语句嘛！C\C++\Java等各种语言都有的嘛！ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int x = i = 0;</div></pre></td></tr></table></figure>
+<p>打完收工！奏是这么简单，哟嘿哟嘿~</p>
+<p>等等，既然你这么问，想必来者不善，不妨又是给我埋的一个坑吧~~那我们来动手看看是否有坑！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function wss() &#123;</div><div class="line">    var x = i = 0;</div><div class="line">&#125; </div><div class="line">wss(); </div><div class="line">alert(x); //&apos;x&apos; is not defined 这个结果正常嘛!毕竟函数内变量的作用范围是局限在函数内部的哟~</div><div class="line">alert(i); //0 卧槽！肿么可以输出0来！！！恭喜你，果断入坑！</div></pre></td></tr></table></figure>
+<p>这样的结果，怎能不感慨“好一个<strong>人参惨淡</strong>”，在了解这个背后的原因之前，我们先来了解下JavaScript官方对于变量Var的一些定义及解释：</p>
+<ul>
+<li>变量的声明</li>
+</ul>
+<p>　　　　1.使用var多次声明同一个变量，是合法的; 重复的声明并初始化变量值，只是相当于普通的赋值语句;</p>
+<p>　　　　2.读取一个未声明的变量值，JavaScript会产生一个错误;</p>
+<p>　　　　3.尝试给一个未经var声明的变量赋值，JavaScript会隐式声明该变量，隐式声明的变量被直接创建为全局变量;</p>
+<p>　　　　4.无论是全局变量还是局部变量，最好都建议使用var进行声明（strict严格模式下不声明var变量直接报错）;</p>
+<p>看完这样的定义，一下子秒懂，有木有？！</p>
+<p>刚才我们上面童鞋那样的写法，直接会导致 <strong>i 变成全局变量</strong>， 所以等同写法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function wss() &#123;</div><div class="line">    i = 0;</div><div class="line">    var x = i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，看看，这是一个多么糟糕的写法，直接会隐式创建一个全局变量，继而引发变量污染。所以，我们切记，在日常开发过程中，不要这么写！</p>
+<h2 id="延伸一"><a href="#延伸一" class="headerlink" title="延伸一"></a>延伸一</h2><p>那到这里，突然还有个疑问，你们说，这显式创建的全局变量和隐式创建的全局变量，自然都是window的属性，那他们俩者真的完全一样么？我们通过ECMAScrpit提供的属性特性查询方法，来发现他们之间的秘密。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var a = 2; </div><div class="line">window.b = 3; </div><div class="line">c = 4; </div><div class="line">this.d = 4; </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;a&apos;); //configurable:false,enumerable:true,value:2,writable:true </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;b&apos;); //configurable:true,enumerable:true,value:3,writable:true </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;c&apos;); //configurable:true,enumerable:true,value:4,writable:true </div><div class="line">Object.getOwnPropertyDescriptor(window, &apos;d&apos;); //configurable:true,enumerable:true,value:4,writable:true</div></pre></td></tr></table></figure>
+<p>通过上面的查询发现，原来还是有差别的，我们再用delete删除属性来验证下，配置性configurable为false的属性无法删除，即通过变量var显式声明全局对象的属性无法删除。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">delete a; // 无法删除 </div><div class="line">delete b; // 可删除 </div><div class="line">delete c; // 可删除 </div><div class="line">delete d; // 可删除</div></pre></td></tr></table></figure></p>
+<h5 id="结论就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。"><a href="#结论就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。" class="headerlink" title="结论就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。"></a><strong>结论</strong>就是：在全局作用域下，使用var定义的变量不可以delete，没有var定义的变量可以delete。也就说明隐式全局变量严格来说不是真正的变量，而是全局对象的属性，因为属性可以通过delete删除，而变量不可以。</h5><h2 id="延伸二"><a href="#延伸二" class="headerlink" title="延伸二"></a>延伸二</h2><p>我们试着来再看这一段小程序，看看结果如何？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var wss = &quot;global&quot;;        </div><div class="line">function f()&#123;           </div><div class="line">    alert(wss);            //提示undefined           </div><div class="line">    var wss = &quot;local&quot;;            </div><div class="line">    alert(wss);           //提示local                           </div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure>
+<p>为何会是这样的结果？这个跟使用<strong>var定义变量还会提升变量声明</strong>有关。</p>
+<p>在函数内部显式声明了一个与全局变量同名的局部变量，第一次alert， 解析器就会先将变量声明提升，所以就导致局部变量wss是已经被声明了，但是没有初始化值，所以提示undefined; 而第二次的alert，wss = “local” 之后的，也就是局部变量wss完成了初始化，所以提示为local。</p>
+<p>该段代码实际相当于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var wss = &quot;global&quot;;        </div><div class="line">function f()&#123;            </div><div class="line">    var wss;       //声明局部变量wss，未初始化            </div><div class="line">    alert(wss);                      </div><div class="line">    wss = &quot;local&quot;; //初始化wss          </div><div class="line">    alert(wss);                                   </div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure>
+<p>那如果不使用var定义变量呢？ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var wss = &quot;global&quot;;        </div><div class="line">function f()&#123;            </div><div class="line">    alert(wss);            //提示global    </div><div class="line">    alert(wss2);           //&apos;wss2&apos; is not defined</div><div class="line">    wss = &quot;local&quot;;   </div><div class="line">    wss2 = &quot;local2&quot;;         </div><div class="line">    alert(wss);           //提示local                           </div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure>
+<h5 id="结论就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。"><a href="#结论就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。" class="headerlink" title="结论就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。"></a><strong>结论</strong>就是：使用var定义的变量的声明提前，未使用var定义的变量声明不变。</h5><h1 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h1><p>JavaScript一个如此简单的赋值语句背后，竟隐藏着太多奇葩的特性，而这些一个不留神，就将让你的程序陷入一个变量污染噩梦里。美，也是有杀伤力滴~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+        <div class="article-meta pull-left">
+          
+  
+
+  <span class="post-categories">
+    <i class="icon-categories"></i>
+    <a href="/categories/JavaScript/">JavaScript</a>
+  </span>
+
+
+          
+  
+
+  <span class="post-tags">
+    <i class="icon-tags"></i>
+    <a href="/tags/JavaScript/">JavaScript</a>, <a href="/tags/变量var/">变量var</a>, <a href="/tags/奇葩之美/">奇葩之美</a>, <a href="/tags/隐式/">隐式</a>
+  </span>
+
+
+        </div>
+        
+    </footer>
+  </div>
+</article>
+
+  
+	<div id="comment">
+	
+	
+	<!-- 多说评论框 start -->
+	 <div class="ds-thread" data-thread-key="/2016/05/11/js-fun-var/" data-title="【JavaScript奇葩之美Ver.1】var，确定你真的会使它么？" data-url="http://sunshinewu.github.io/2016/05/11/js-fun-var/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"sunshinewu"};
+	  (function() {
+	    var ds = document.createElement('script');
+	    ds.type = 'text/javascript';ds.async = true;
+	    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	    ds.charset = 'UTF-8';
+	    (document.getElementsByTagName('head')[0] 
+	     || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	  </script>
+	<!-- 多说公共JS代码 end -->
+	
+	</div>
+
+
+
+
+      </main>
+    </article>
+
+    <footer id="colophon" class="site-footer" role="contentinfo"><p class="site-info">
+  Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+  Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+  </br>
+  
+  &copy; 2016 Sunshine.Wu
+  
+</p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
