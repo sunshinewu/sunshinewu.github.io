@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunshinewu.github.io/"/>
-  <updated>2016-07-28T21:48:10.289Z</updated>
+  <updated>2016-07-28T21:50:26.849Z</updated>
   <id>http://sunshinewu.github.io/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://sunshinewu.github.io/2016/07/29/FunFace/"/>
     <id>http://sunshinewu.github.io/2016/07/29/FunFace/</id>
     <published>2016-07-28T17:01:17.000Z</published>
-    <updated>2016-07-28T21:48:10.289Z</updated>
+    <updated>2016-07-28T21:50:26.849Z</updated>
     
     <content type="html"><![CDATA[<p>这年头，HTML5火遍大江南北呀，神马？火遍全球？对！（在国内跟着火的，还有一个叫“H5”的名儿，具体你懂的）</p>
 <p>跟着它顺便火的，还有个HTML5的新标签，叫<strong>Canvas</strong>，专门用于Web界面画画图，搞点交互，模拟，游戏啥的。虽然大家都称Canvas为HTML5的新标签，看起来好像跟HTML语言有什么关联似的，但其实Canvas画图是通过JavaScript来实现的。所以，如果你想学习Canvas画图，你最好要有一定的JavaScript基础。</p>
-<center><br><img src="http://sunshinewu.github.io/images/FunFace.gif"><br></center><a id="more"></a><br><br><br># 前言<br><br>提到画图，现实下对于没啥美术天赋及基础滴人来说，那简直不易，就是再怎么画，明明你心目中想画的是白龙马，结果画完画风一变成了草泥马-_-| 而程序里头，这画图涉及到图形学，也不易啊，若还想在静态图形的基础上配个动画，啧啧，必须用上各种小学中学乃至大学各种数学物理知识，那个时候，瞬间发现，原来学了介么多年的数理化，总算有用武之地了，那个内牛满面。<br><br>“说了这么多不相干的啰嗦，你说，那今天我们到底要整啥？！” ——路人甲<br><br>“来，别急嘛，我们先上一张可爱的效果图”<br><br><br>## 「FunFace」一张粉嫩的欢乐脸<br><br><br><center><br><img src="http://sunshinewu.github.io/images/RecordFunFace.gif"><br></center>
+<center><br><img src="http://sunshinewu.github.io/images/FunFace.gif"><br></center><a id="more"></a><br><br><br># 前言<br><br>提到画图，现实下对于没啥美术天赋及基础滴人来说，那简直不易，就是再怎么画，明明你心目中想画的是白龙马，结果画完画风一变成了草泥马-_-| 而程序里头，这画图涉及到图形学，也不易啊，若还想在静态图形的基础上配个动画，啧啧，必须用上各种小学中学乃至大学各种数学物理知识，那个时候，瞬间发现，原来学了介么多年的数理化，总算有用武之地了，那个内牛满面。<br><br>“说了这么多不相干的啰嗦，你说，那今天我们到底要整啥？！” ——路人甲<br><br>“来，别急嘛，我们先上一张可爱的效果图”<br><br><br>## 「FunFace」一张粉嫩的欢乐脸<br><br><br><center><br><img src="http://sunshinewu.github.io/images/RecordFunFace.gif"><br><br></center>
 
 
 
