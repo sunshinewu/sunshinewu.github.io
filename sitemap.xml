@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sunshinewu.github.io/about/index.html</loc>
+    
+    <lastmod>2016-07-31T10:04:15.733Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://sunshinewu.github.io/2016/07/29/FunFace/</loc>
     
     <lastmod>2016-07-29T09:20:44.323Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://sunshinewu.github.io/2016/05/07/Hexo-World/</loc>
     
     <lastmod>2016-07-28T17:01:05.506Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sunshinewu.github.io/about/index.html</loc>
-    
-    <lastmod>2016-07-25T19:10:13.065Z</lastmod>
     
   </url>
   
