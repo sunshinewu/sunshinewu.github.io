@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunshinewu.github.io/"/>
-  <updated>2016-08-23T11:03:36.274Z</updated>
+  <updated>2016-08-23T11:21:49.129Z</updated>
   <id>http://sunshinewu.github.io/</id>
   
   <author>
@@ -20,12 +20,14 @@
     <link href="http://sunshinewu.github.io/2016/08/23/SmartJD/"/>
     <id>http://sunshinewu.github.io/2016/08/23/SmartJD/</id>
     <published>2016-08-23T12:01:17.000Z</published>
-    <updated>2016-08-23T11:03:36.274Z</updated>
+    <updated>2016-08-23T11:21:49.129Z</updated>
     
     <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在公交地铁上下班的路上，在与亲朋好友相聚的场合下，无论在哪一个场景，但凡一有空，一个个都成了不折不扣的低头族的当下，谈及移动互联网神马的已经不新鲜了，对于企业应用及市场拓展而言，移动互联这块的业务已经处于最重中之重的地位。这几年的电商，也一样，各自推出了各自的移动端产品。</p>
 <p>好比京东，移动端总共就有三个，有APP端，微信端，QQ端…对于类似像我这样一个京东“<strong>重度买买买</strong>”的用户，你懂的，京东的价格变动异常大之外，京东各平台端的价格也差异较大！否则，当你不知情下单的时候，付完款你就哭了:) 这样一来，每次我所想了解一个商品的时候，看完京东的PC端价格之后，还想看看其他端的价格，总得费劲得拿起手机，先是打开京东APP看看，然后再打开微信看看，最后再打开QQ…心好累-_-|  其实也有其它类似的一些软件\插件可以解决，但还是嫌弃他们太多的广告及多余无用功能，那还能更简洁更直接更有效率一点的么？</p>
 <p>当然！程序猿，改变世界滴银啊！！</p>
 <center><br><img src="http://sunshinewu.github.io/images/SmartJD.gif"><br><br></center> <a id="more"></a><br><br># 「SmartJD」京东比比看<br><br>## 功能简介<br><br>「SmartJD」 —— 致力于为用户在浏览京东商品页面时（包含京东自营，京东全球购，京东医药等）提供PC端、APP端、微信端、手机QQ端全方位价格一览显示，并呈现对京东商城的商品库存全国实时查询。<br><br>所以，别的功能，我暂时都没接着整，目前就提供了两个核心：<br><br>- 全平台端价格一览显示<br>- 商品库存全国实时一键查询<br><br>## 疗效还得看效果图<br><br><center><br><img src="http://sunshinewu.github.io/images/SmartJD_1.gif" alt=""><br></center>
+
+<center><br><img src="http://sunshinewu.github.io/images/SmartJD_2.gif" alt=""><br></center>
 
 
 <h2 id="实现原理简述"><a href="#实现原理简述" class="headerlink" title="实现原理简述"></a>实现原理简述</h2><ul>
