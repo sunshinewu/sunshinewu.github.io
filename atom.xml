@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunshinewu.github.io/"/>
-  <updated>2016-08-01T15:50:02.148Z</updated>
+  <updated>2016-08-23T11:03:36.274Z</updated>
   <id>http://sunshinewu.github.io/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「SmartJD」 一览京东全端价格的小插件</title>
+    <link href="http://sunshinewu.github.io/2016/08/23/SmartJD/"/>
+    <id>http://sunshinewu.github.io/2016/08/23/SmartJD/</id>
+    <published>2016-08-23T12:01:17.000Z</published>
+    <updated>2016-08-23T11:03:36.274Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在公交地铁上下班的路上，在与亲朋好友相聚的场合下，无论在哪一个场景，但凡一有空，一个个都成了不折不扣的低头族的当下，谈及移动互联网神马的已经不新鲜了，对于企业应用及市场拓展而言，移动互联这块的业务已经处于最重中之重的地位。这几年的电商，也一样，各自推出了各自的移动端产品。</p>
+<p>好比京东，移动端总共就有三个，有APP端，微信端，QQ端…对于类似像我这样一个京东“<strong>重度买买买</strong>”的用户，你懂的，京东的价格变动异常大之外，京东各平台端的价格也差异较大！否则，当你不知情下单的时候，付完款你就哭了:) 这样一来，每次我所想了解一个商品的时候，看完京东的PC端价格之后，还想看看其他端的价格，总得费劲得拿起手机，先是打开京东APP看看，然后再打开微信看看，最后再打开QQ…心好累-_-|  其实也有其它类似的一些软件\插件可以解决，但还是嫌弃他们太多的广告及多余无用功能，那还能更简洁更直接更有效率一点的么？</p>
+<p>当然！程序猿，改变世界滴银啊！！</p>
+<center><br><img src="http://sunshinewu.github.io/images/SmartJD.gif"><br><br></center> <a id="more"></a><br><br># 「SmartJD」京东比比看<br><br>## 功能简介<br><br>「SmartJD」 —— 致力于为用户在浏览京东商品页面时（包含京东自营，京东全球购，京东医药等）提供PC端、APP端、微信端、手机QQ端全方位价格一览显示，并呈现对京东商城的商品库存全国实时查询。<br><br>所以，别的功能，我暂时都没接着整，目前就提供了两个核心：<br><br>- 全平台端价格一览显示<br>- 商品库存全国实时一键查询<br><br>## 疗效还得看效果图<br><br><center><br><img src="http://sunshinewu.github.io/images/SmartJD_1.gif" alt=""><br></center>
+
+
+<h2 id="实现原理简述"><a href="#实现原理简述" class="headerlink" title="实现原理简述"></a>实现原理简述</h2><ul>
+<li>利用Fiddler等工具对京东各移动端进行数据抓包及整理所需数据</li>
+<li>分析京东商品PC端页面的源码</li>
+<li>利用<a href="http://developer.chrome.com/extensions/content_scripts.html" target="_blank" rel="external">Chrome Content Scripts</a> 将相关JavaScript实现注入页面</li>
+</ul>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>由于没支付 Google 5美金，So就没办法上传到Google应用商店啦，想用的童鞋，直接点击<a href="https://github.com/sunshinewu/SmartJD/raw/master/release/SmartJD.crx" target="_blank" rel="external">这里</a>下载吧</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>前端，魅力无限，不仅仅只是写写页面，切切图，用上JS大法，一切皆新生。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h1&gt;&lt;p&gt;在公交地铁上下班的路上，在与亲朋好友相聚的场合下，无论在哪一个场景，但凡一有空，一个个都成了不折不扣的低头族的当下，谈及移动互联网神马的已经不新鲜了，对于企业应用及市场拓展而言，移动互联这块的业务已经处于最重中之重的地位。这几年的电商，也一样，各自推出了各自的移动端产品。&lt;/p&gt;
+&lt;p&gt;好比京东，移动端总共就有三个，有APP端，微信端，QQ端…对于类似像我这样一个京东“&lt;strong&gt;重度买买买&lt;/strong&gt;”的用户，你懂的，京东的价格变动异常大之外，京东各平台端的价格也差异较大！否则，当你不知情下单的时候，付完款你就哭了:) 这样一来，每次我所想了解一个商品的时候，看完京东的PC端价格之后，还想看看其他端的价格，总得费劲得拿起手机，先是打开京东APP看看，然后再打开微信看看，最后再打开QQ…心好累-_-|  其实也有其它类似的一些软件\插件可以解决，但还是嫌弃他们太多的广告及多余无用功能，那还能更简洁更直接更有效率一点的么？&lt;/p&gt;
+&lt;p&gt;当然！程序猿，改变世界滴银啊！！&lt;/p&gt;
+&lt;center&gt;&lt;br&gt;&lt;img src=&quot;http://sunshinewu.github.io/images/SmartJD.gif&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;
+    
+    </summary>
+    
+      <category term="Chrome Extension" scheme="http://sunshinewu.github.io/categories/Chrome-Extension/"/>
+    
+    
+      <category term="JavaScript" scheme="http://sunshinewu.github.io/tags/JavaScript/"/>
+    
+      <category term="CSS" scheme="http://sunshinewu.github.io/tags/CSS/"/>
+    
+      <category term="Chrome" scheme="http://sunshinewu.github.io/tags/Chrome/"/>
+    
+      <category term="插件" scheme="http://sunshinewu.github.io/tags/%E6%8F%92%E4%BB%B6/"/>
+    
+      <category term="京东" scheme="http://sunshinewu.github.io/tags/%E4%BA%AC%E4%B8%9C/"/>
+    
+      <category term="比价格" scheme="http://sunshinewu.github.io/tags/%E6%AF%94%E4%BB%B7%E6%A0%BC/"/>
+    
+      <category term="jQuery" scheme="http://sunshinewu.github.io/tags/jQuery/"/>
+    
+  </entry>
   
   <entry>
     <title>「FunFace」用一张粉嫩的小脸，来谈谈HTML5 Canvas的某些玩意儿</title>
