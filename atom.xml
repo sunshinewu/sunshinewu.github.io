@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://sunshinewu.github.io/"/>
-  <updated>2016-08-25T18:55:38.543Z</updated>
+  <updated>2016-08-25T19:00:24.165Z</updated>
   <id>http://sunshinewu.github.io/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://sunshinewu.github.io/2016/08/25/Gulpjs/"/>
     <id>http://sunshinewu.github.io/2016/08/25/Gulpjs/</id>
     <published>2016-08-25T15:33:19.000Z</published>
-    <updated>2016-08-25T18:55:38.543Z</updated>
+    <updated>2016-08-25T19:00:24.165Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="大环境所思"><a href="#大环境所思" class="headerlink" title="大环境所思"></a>大环境所思</h1><p><strong>Node</strong> 阵营这两年一下子打了不少鸡血，光从 <strong>npm</strong> 这名目繁多的各类 Packages \ Libraries 急剧增长的速度就可以亲切又深刻滴感受到啊！这带来各种开发易用性，便利性，高效率的轮子同时，也带来了一些苦恼。什么？我刚<code>npm install</code>完准备要学的 XXX 库就这么被告知过时了？！ 神马？现在又流行 XXXX 了！ 好吧，慢慢地你会不自觉地被前端火热的这世界一点点在冲击着你的认知，好像前端的世界，永远没完没了地各种颠覆，各种折腾。以致，你会时常不由自主地产生这么一个疑问：为什么我们不能在JavaScript的地盘上多消停一会儿？<center><img src="http://sunshinewu.github.io/images/Gulpjs.gif"></center> <a id="more"></a> </p>
+    <content type="html"><![CDATA[<h1 id="大环境所思"><a href="#大环境所思" class="headerlink" title="大环境所思"></a>大环境所思</h1><p><strong>Node</strong> 阵营这两年一下子打了不少鸡血，光从 <strong>npm</strong> 这名目繁多的各类 Packages \ Libraries 急剧增长的速度就可以亲切又深刻滴感受到啊！这带来各种开发易用性，便利性，高效率的轮子同时，也带来了一些苦恼。什么？我刚<code>npm install</code>完准备要学的 XXX 库就这么被告知过时了？！ 神马？现在又流行 XXXX 了！ 好吧，慢慢地你会不自觉地被前端火热的这世界一点点在冲击着你的认知，好像前端的世界，永远没完没了地各种颠覆，各种折腾。以致，你会时常不由自主地产生这么一个疑问：为什么我们不能在JavaScript的地盘上多消停一会儿？<center><img src="http://sunshinewu.github.io/images/Gulpjs.gif"></center></p>
+<p> <a id="more"></a> </p>
 <p>当然，这其实也意味着相对两个方面：</p>
 <ol>
 <li>前端世界的很多东西，与现实及其它后端语言所具备的工程化、专业化仍存在一些落后的情况；</li>
@@ -45,7 +46,8 @@
 <h6 id="其次从构建过程来剖析"><a href="#其次从构建过程来剖析" class="headerlink" title="其次从构建过程来剖析"></a>其次从构建过程来剖析</h6><p>Grunt 是基于文件的形式进行构建的，所以使用 Grunt 的 I/O 过程中会产生一些中间态的临时文件，A任务处理完会生成一个临时文件，B任务会读取这个临时文件，继续做自己的操作，然后再生成一个临时文件，给C任务用，以此类推，其它任务可能会基于临时文件再做处理并生成最终的构建后文件。</p>
 <p>而使用 Gulp 的优势就是利用流的方式进行文件的处理，通过管道将多个任务和操作连接起来，因此只有一次 I/O 的过程，流程更清晰，更纯粹，构建速度也要比 Grunt 快。 当然，如果构建的项目很小，可能差距就体现不出来了。</p>
 <p>这一点，我们可以从以下两张图来更加形象地得到了解：</p>
-<p><img src="http://sunshinewu.github.io/images/gulp_1.gif" alt=""><br><img src="http://sunshinewu.github.io/images/gulp_2.gif" alt=""></p>
+<p><img src="http://sunshinewu.github.io/images/gulp_1.gif" alt=""></p>
+<p><img src="http://sunshinewu.github.io/images/gulp_2.gif" alt=""></p>
 <p>所以，简单地从这两点，应该能感受到为何大家越来越多人使用 Gulp 了的原因了吧？ 不过，也不能一刀切得这么着急得下定论，具体孰优孰劣，或各有千秋，一切看时间，由时间去证明吧。 接下来，我们就重点来说说Gulp的使用。</p>
 <h1 id="Gulp之快速上手"><a href="#Gulp之快速上手" class="headerlink" title="Gulp之快速上手"></a>Gulp之快速上手</h1><p>1、首先确保你已经正确安装了 <code>nodejs</code> 环境。然后以全局方式安装 <code>Gulp</code>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g gulp</div></pre></td></tr></table></figure>
@@ -128,8 +130,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'one'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//one是一个异步执行的任务</span></div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'one is done'</span>)</div><div class="line">  &#125;,<span class="number">5000</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//two任务虽然依赖于one任务,但并不会等到one任务中的异步操作完成后再执行</span></div><div class="line">gulp.task(<span class="string">'two'</span>,[<span class="string">'one'</span>],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'two is done'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>上面的例子中我们执行two任务时，会先执行one任务，但不会去等待one任务中的异步操作完成后再执行two任务，而是紧接着执行two任务。所以two任务会在one任务中的异步操作完成之前就执行了。</p>
 <p>那如果我们想等待异步任务中的异步操作完成后再执行后续的任务，该怎么做呢？</p>
-<p>######有三种方法可以实现：</p>
-<p>第一：在异步操作完成后执行一个回调函数来通知gulp这个异步任务已经完成,这个回调函数就是任务函数的第一个参数。</p>
+<h6 id="有三种方法可以实现："><a href="#有三种方法可以实现：" class="headerlink" title="有三种方法可以实现："></a>有三种方法可以实现：</h6><p>第一：在异步操作完成后执行一个回调函数来通知gulp这个异步任务已经完成,这个回调函数就是任务函数的第一个参数。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'one'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123; <span class="comment">//cb为任务函数提供的回调，用来通知任务已经完成</span></div><div class="line">  <span class="comment">//one是一个异步执行的任务</span></div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'one is done'</span>);</div><div class="line">    cb();  <span class="comment">//执行回调，表示这个异步任务已经完成</span></div><div class="line">  &#125;,<span class="number">5000</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">//这时two任务会在one任务中的异步操作完成后再执行</span></div><div class="line">gulp.task(<span class="string">'two'</span>,[<span class="string">'one'</span>],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'two is done'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>第二：定义任务时返回一个流对象。适用于任务就是操作gulp.src获取到的流的情况。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'one'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">cb</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> stream = gulp.src(<span class="string">'client/**/*.js'</span>)</div><div class="line">      .pipe(dosomething()) <span class="comment">//dosomething()中有某些异步操作</span></div><div class="line">      .pipe(gulp.dest(<span class="string">'build'</span>));</div><div class="line">    <span class="keyword">return</span> stream;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.task(<span class="string">'two'</span>,[<span class="string">'one'</span>],<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'two is done'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -144,8 +145,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch(glob[, opts, cb])</div></pre></td></tr></table></figure>
 <p>glob和opts参数与第一种用法相同<br>cb参数为一个函数。每当监视的文件发生变化时，就会调用这个函数,并且会给它传入一个对象，该对象包含了文件变化的一些信息，<code>type</code>属性为变化的类型，可以是<code>added</code>,<code>changed</code>,<code>deleted</code>；<code>path</code>属性为发生变化的文件的路径</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">gulp.watch(<span class="string">'js/**/*.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(event.type); <span class="comment">//变化类型 added为新增,deleted为删除，changed为改变 </span></div><div class="line">    <span class="built_in">console</span>.log(event.path); <span class="comment">//变化的文件的路径</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h1 id="顺便附上常用的Gulp插件"><a href="#顺便附上常用的Gulp插件" class="headerlink" title="顺便附上常用的Gulp插件"></a>顺便附上常用的Gulp插件</h1><p>###js文件压缩</p>
-<p>使用gulp-uglify</p>
+<h1 id="顺便附上常用的Gulp插件"><a href="#顺便附上常用的Gulp插件" class="headerlink" title="顺便附上常用的Gulp插件"></a>顺便附上常用的Gulp插件</h1><h3 id="js文件压缩"><a href="#js文件压缩" class="headerlink" title="js文件压缩"></a>js文件压缩</h3><p>使用gulp-uglify</p>
 <p>安装：<code>npm install --save-dev gulp-uglify</code></p>
 <p>用来压缩js文件，使用的是uglify引擎</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</div><div class="line">    uglify = <span class="built_in">require</span>(<span class="string">"gulp-uglify"</span>);</div><div class="line"></div><div class="line">gulp.task(<span class="string">'minify-js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    gulp.src(<span class="string">'js/*.js'</span>) <span class="comment">// 要压缩的js文件</span></div><div class="line">    .pipe(uglify())</div><div class="line">    .pipe(gulp.dest(<span class="string">'dist/js'</span>)); <span class="comment">//压缩后的路径</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -190,7 +190,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;大环境所思&quot;&gt;&lt;a href=&quot;#大环境所思&quot; class=&quot;headerlink&quot; title=&quot;大环境所思&quot;&gt;&lt;/a&gt;大环境所思&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Node&lt;/strong&gt; 阵营这两年一下子打了不少鸡血，光从 &lt;strong&gt;npm&lt;/strong&gt; 这名目繁多的各类 Packages \ Libraries 急剧增长的速度就可以亲切又深刻滴感受到啊！这带来各种开发易用性，便利性，高效率的轮子同时，也带来了一些苦恼。什么？我刚&lt;code&gt;npm install&lt;/code&gt;完准备要学的 XXX 库就这么被告知过时了？！ 神马？现在又流行 XXXX 了！ 好吧，慢慢地你会不自觉地被前端火热的这世界一点点在冲击着你的认知，好像前端的世界，永远没完没了地各种颠覆，各种折腾。以致，你会时常不由自主地产生这么一个疑问：为什么我们不能在JavaScript的地盘上多消停一会儿？&lt;center&gt;&lt;img src=&quot;http://sunshinewu.github.io/images/Gulpjs.gif&quot;&gt;&lt;/center&gt;
+      &lt;h1 id=&quot;大环境所思&quot;&gt;&lt;a href=&quot;#大环境所思&quot; class=&quot;headerlink&quot; title=&quot;大环境所思&quot;&gt;&lt;/a&gt;大环境所思&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Node&lt;/strong&gt; 阵营这两年一下子打了不少鸡血，光从 &lt;strong&gt;npm&lt;/strong&gt; 这名目繁多的各类 Packages \ Libraries 急剧增长的速度就可以亲切又深刻滴感受到啊！这带来各种开发易用性，便利性，高效率的轮子同时，也带来了一些苦恼。什么？我刚&lt;code&gt;npm install&lt;/code&gt;完准备要学的 XXX 库就这么被告知过时了？！ 神马？现在又流行 XXXX 了！ 好吧，慢慢地你会不自觉地被前端火热的这世界一点点在冲击着你的认知，好像前端的世界，永远没完没了地各种颠覆，各种折腾。以致，你会时常不由自主地产生这么一个疑问：为什么我们不能在JavaScript的地盘上多消停一会儿？&lt;center&gt;&lt;img src=&quot;http://sunshinewu.github.io/images/Gulpjs.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;
     
     </summary>
     
